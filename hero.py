@@ -8,17 +8,47 @@ import sqlite3
 username = "LewisTheRobot"
 password = "lewismenelaws"
 
-subreddit = "dota2"
+
+#Enter what subreddit you want to choose
+subreddit_choice = "dota2"
 #credentials of your sqlite database. Download sqlite3 viewer to make one easily.
-conn = sqlite3.connect('')
+conn = sqlite3.connect('dotaheroes')
 c = conn.cursor()
 #user_agent tells the reddit servers what your bot does.
 r = praw.Reddit(user_agent = "Count amount of times heroes are mentioned")
 
 #lists all dota heroes in game
-words_to_match = [r'\bAbaddon\b', r'\bAlchemist\b', r'\bAncient Apparition\b', r'\bAnti Mage\b', r'\bAxe\b', r'\bBane\b', r'\bBatrider\b', r'\bBeastmaster\b', r'\bBloodseeker\b', r'\bBounty Hunter\b', r'\rBrewmaster\b', r'\bBristleback\b', r'\bBroodmother\b', r'\bCentaur Warrunner\b', r'\bChaos Knight\b', r'\bChen\b', r'\bClinkz\b', r'\bClockwerk\b', r'\bCrystal Maiden\b', r'\bDark Seer\b', r'\bDazzle\b', r'\bDeath Prophet\b', r'\bDisruptor\b', r'\bDoom\b', r'\bDragon Knight\b', r'\bDrow Ranger\b', r'\bEarthshaker\b', r'\bEarth Spirt\b', r'\bElder Titan\b', r'\bEmber Spirit\b', r'\bEnchantress\b', r'\bEnigma\b', r'\bFaceless Void\b', r'\bGyrocopter\b', r'\bHuskar\b', r'\bInvoker\b', r'\bIo\b', r'\bJakiro\b', r'\bJuggernaut\b', r'\bKeeper of the Light\b', r'\bKunkka\b', r'\bLegion Commander\b', r'\bLeshrac\b', r'\bLich\b', r'\bLifestealer\b', r'\bLina\b', r'\bLion\b', r'\bLone Druid\b', r'\bLuna\b', r'\bLycan\b', r'\bMagnus\b', r'\bMedusa\b', r'\bMeepo\b', r'\bMirana\b', r'\bMorphling\b', r'\bNaga Siren\b', r'\bNatures Prophet\b', r'\bNecrophos\b', r'\bNight Stalker\b', r'\bNyx Assassin\b', r'\bOgre Magi\b', r'\bOmniKnight\b', r'\bOracle\b', r'\bOutworld Devourer\b', r'\bPhantom Assassin\b', r'\bPhantom Lancer\b', r'\bPheonix\b', r'\bPuck\b', r'\bPudge\b', r'\bPugna\b', r'\bQueen of Pain\b', r'\bRazor\b', r'\bRiki\b', r'\bRubick\b', r'\bSand King\b', '\bShadow Demon\b', r'\bShadow Fiend\b', r'\bShadow Shaman\b', r'\bSilencer\b', r'\bSkywrath Mage\b', r'\bSlardar\b', r'\bSlark\b', r'\bSniper\b', r'\bSpectre\b', r'\bSpirit Breaker\b', r'\bStorm Spirit\b', r'\bSven\b', r'\bTechies\b', r'\bTemplar Assassin\b', r'\bTerrorblade\b', r'\bTidehunter\b', r'\bTimbersaw\b', r'\bTinker\b', r'\bTiny\b', r'\bTreant Protector\b', r'\bTroll Warlord\b', r'\bTusk\b', r'\bUndying\b', r'\bUrsa\b', r'\bVengeful Spirit\b', r'\bVenomancer\b', r'\bViper\b', r'\bVisage\b', r'\bWarlock\b', r'\bWeaver\b', r'\bWindranger\b', r'\bWitch Doctor\b', r'\bWraith King\b', r'\bZeus\b']
+words_to_match = [r'\babaddon\b', r'\balchemist\b', r'\bancient apparition\b', r'\banti mage\b', r'\baxe\b', r'\bbane\b', r'\bbatrider\b', r'\bbeastmaster\b', r'\bbloodseeker\b', r'\bbounty hunter\b', r'\rbrewmaster\b', r'\bbristleback\b', r'\bbroodmother\b', r'\bcentaur warrunner\b', r'\bchaos knight\b', r'\bchen\b', r'\bclinkz\b', r'\bclockwerk\b', r'\bcrystal maiden\b', r'\bdark seer\b', r'\bdazzle\b', r'\bdeath prophet\b', r'\bdisruptor\b', r'\bdoom\b', r'\bdragon knight\b', r'\bdrow ranger\b', r'\bearthshaker\b', r'\bearth spirt\b', r'\belder titan\b', r'\bember spirit\b', r'\benchantress\b', r'\benigma\b', r'\bfaceless void\b', r'\bgyrocopter\b', r'\bhuskar\b', r'\binvoker\b', r'\bio\b', r'\bjakiro\b', r'\bjuggernaut\b', r'\bkeeper of the light\b', r'\bkunkka\b', r'\blegion commander\b', r'\bleshrac\b', r'\blich\b', r'\blifestealer\b', r'\blina\b', r'\blion\b', r'\blone druid\b', r'\bluna\b', r'\blycan\b', r'\bmagnus\b', r'\bmedusa\b', r'\bmeepo\b', r'\bmirana\b', r'\bmorphling\b', r'\bnaga siren\b', r'\bnatures prophet\b', r'\bnecrophos\b', r'\bnight stalker\b', r'\bnyx assassin\b', r'\bogre magi\b', r'\bomniknight\b', r'\boracle\b', r'\boutworld devourer\b', r'\bphantom assassin\b', r'\bphantom lancer\b', r'\bpheonix\b', r'\bpuck\b', r'\bpudge\b', r'\bpugna\b', r'\bqueen of pain\b', r'\brazor\b', r'\briki\b', r'\brubick\b', r'\bsand king\b', '\bshadow demon\b', r'\bshadow fiend\b', r'\bshadow shaman\b', r'\bsilencer\b', r'\bskywrath mage\b', r'\bslardar\b', r'\bslark\b', r'\bsniper\b', r'\bspectre\b', r'\bspirit breaker\b', r'\bstorm spirit\b', r'\bsven\b', r'\btechies\b', r'\btemplar assassin\b', r'\bterrorblade\b', r'\btidehunter\b', r'\btimbersaw\b', r'\btinker\b', r'\btiny\b', r'\btreant protector\b', r'\btroll warlord\b', r'\btusk\b', r'\bundying\b', r'\bursa\b', r'\bvengeful spirit\b', r'\bvenomancer\b', r'\bviper\b', r'\bvisage\b', r'\bwarlock\b', r'\bweaver\b', r'\bwindranger\b', r'\bwitch doctor\b', r'\bwraith king\b', r'\bzeus\b']
 
 
 #Empty list to store all comments in so that the prompt can show you how many have been counted
 
 storage = []
+
+r.login(username, password)
+
+def run_bot():
+	subreddit = r.get_subreddit(subreddit_choice)
+	print("Grabbing subreddit")
+	comments = subreddit.get_comments(limit=200)
+	print("Grabbing comments")
+	for comment in comments:
+		comment_text = comment.body.lower()
+		isMatch = any(re.search(string, comment_text) for string in words_to_match)
+		if comment.id not in storage and isMatch and comment.author not in storage:
+			print("A hero was mentioned! Adding to database :)")
+			storage.append(comment.author)
+			c.execute("INSERT INTO heroes (id, hero_name) VALUES(?, ?)", (str(comment.id), str(isMatch)))
+			conn.commit()
+
+	print("There are currently " + str(len(storage)) + " people who have said a hero name.")
+
+
+
+while True:
+	run_bot()
+	time.sleep(2)
+
+
+
+
